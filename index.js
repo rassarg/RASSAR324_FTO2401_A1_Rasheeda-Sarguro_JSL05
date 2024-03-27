@@ -1,5 +1,5 @@
 // Array of song objects. Add at least 5 songs with title, artist, and genre properties.
-const songList = [
+const songs = [
     { title: "Hooked on a Feeling", artist: "Blue Swede", genre: "Pop" },
     { title: "Moonage Daydream", artist: "David Bowie", genre: "Rock" },
     { title: "I Want You Back", artist: "The Jackson 5", genre: "Pop" },
@@ -17,34 +17,47 @@ const songList = [
     { title: "Numb", artist: "Linkin Park", genre: "Rock" },
     { title: "Revelry", artist: "Kings of Leon", genre: "Rock"},
     { title: "Toxic", artist: "Britney Spears", genre: "Pop"}
-    // Feel free to add even more songs
 ];
 
 
 // Object containing each Guardian's preferred genre
 const guardians = {
-    "Star-Lord": "Rock",
-    "Gamora": "Pop",
-    "Drax": "R&B", 
-    "Rocket": "Rock",
-    "Groot": "Pop"
-    // Add preferences for Drax, Rocket, and Groot
+    'Star-Lord': "Rock",
+    'Gamora': "Pop",
+    'Drax': "R&B", 
+    'Rocket': "Rock",
+    'Groot': "Pop"
 };
 
+    // Function to generate playlist based on preferred genre
+// Function to generate playlist based on preferred genre
+function generatePlaylist(guardians, songs) {
+    const playlists = {}; // playlists object for each Guardian
 
-// Function to generate playlist based on preferred genre 
+    for (let guardian in guardians) { // Iterate over each Guardian
+        const genre = guardians[guardian];   // Get the Guardian's preferred genre
+        const playlist = songs    
+            .filter(song => song.genre === genre)  // the filter() method creates a new array of only songs of each guardians genre
+            .map(song => ({ title: song.title, artist: song.artist })); // the map() method created a new object, that contains title and artist key: value pairs.
+        playlists[guardian] = playlist;  // This then stores the playlist created in the playlists object above
+    }
 
-function generatePlaylist(guardians, songList) {
-    // Use the map() function to create playlists for each Guardian
-    const starlordPlaylist = songList.map(songList => songList.genre === "Rock");
-    //console.log(starlordPlaylist.join(","));
-    const gamoraPlaylist = songList.map(songList => songList.genre === "Pop");
-    const draxPlaylist = songList.map(songList => songList.genre === "R&B");
-    const rocketPlaylist = songList.map(songList => songList.genre === "Rock");
-    const grootPlaylist = songList.map(songList => songList.genre === "Pop");
+    // Display the playlists on the web page
+    const playlistsElement = document.getElementById('playlists');  // retrieves html element 'playlists'
+    for (let guardian in playlists) {                       // iterates over each guardian in the playlists object
+        // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() to add CSS styling :
+        const playlistDiv = `
+                <h3>${guardian}'s Playlist</h3><br>
+                ${playlists[guardian].map(song => `
+                    <span class="song-title">${song.title}</span> by <span class="song-artist">${song.artist}</span><br>
+                `).join('')}
+        `;
+        playlistsElement.innerHTML += playlistDiv;     // adds in the template literal as html content. += appends it instead of replacing it.
+    }
 
-   
-}   
-//Call generatePlaylist and display the playlists for each Guardian
-generatePlaylist(guardians, songList);
+}
 
+// Call generatePlaylist and display the playlists for each Guardian
+generatePlaylist(guardians, songs);
+
+        

@@ -5,6 +5,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    line-height: 1.5em;
 }
 
 h1 {
@@ -14,7 +15,7 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for headings */
 }
 
-.playlists {
+#playlists {
     margin: 20px;
     padding: 20px; /* Increased padding */
     background-color: #6A5ACD; /* Purple background for playlists */
