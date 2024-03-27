@@ -42,7 +42,7 @@ function generatePlaylist(guardians, songs) {
         playlists[guardian] = playlist;  // This then stores the playlist created in the playlists object above
     }
 
-    // Display the playlists on the web page
+    // Display the playlists 
     const playlistsElement = document.getElementById('playlists');  // retrieves html element 'playlists'
     for (let guardian in playlists) {                       // iterates over each guardian in the playlists object
         // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() to add CSS styling :
