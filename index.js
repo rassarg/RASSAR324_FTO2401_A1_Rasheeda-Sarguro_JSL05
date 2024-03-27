@@ -32,23 +32,23 @@ const guardians = {
     // Function to generate playlist based on preferred genre
 // Function to generate playlist based on preferred genre
 function generatePlaylist(guardians, songs) {
-    const playlists = {}; // playlists object for each Guardian
+    const guardianPlaylists = {}; // created a variable to store the playlists object for each Guardian
 
     for (let guardian in guardians) { // Iterate over each Guardian
         const genre = guardians[guardian];   // Get the Guardian's preferred genre
         const playlist = songs    
-            .filter(song => song.genre === genre)  // the filter() method creates a new array of only songs of each guardians genre
+            .filter(song => song.genre === genre) // the filter() method creates a new array of only songs of each guardians genre
             .map(song => ({ title: song.title, artist: song.artist })); // the map() method created a new object, that contains title and artist key: value pairs.
-        playlists[guardian] = playlist;  // This then stores the playlist created in the playlists object above
+        guardianPlaylists[guardian] = playlist;  // This then stores the playlist created in the guardianPlaylists object above
     }
 
     // Display the playlists 
     const playlistsElement = document.getElementById('playlists');  // retrieves html element 'playlists'
-    for (let guardian in playlists) {                       // iterates over each guardian in the playlists object
+    for (let guardian in guardianPlaylists) {                       // iterates over each guardian in the playlists object
         // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() to add CSS styling :
         const playlistDiv = `
                 <h3>${guardian}'s Playlist</h3><br>
-                ${playlists[guardian].map(song => `
+                ${guardianPlaylists[guardian].map(song => `
                     <span class="song-title">${song.title}</span> by <span class="song-artist">${song.artist}</span><br>
                 `).join('')}
         `;
