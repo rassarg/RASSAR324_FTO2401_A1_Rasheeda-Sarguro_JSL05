@@ -46,14 +46,14 @@ function generatePlaylist(guardians, songs) {
     
         // Display the playlists 
         for (let guardian in guardianPlaylists) { // iterates over each guardian in the playlists object
-            // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() to add CSS styling :
+            // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() method to add CSS styling :
             const playlistDiv = `
-                    <h2>${guardian}'s Playlist</h2><br>
+                    <h2>${guardian}'s Playlist</h2>
                     ${guardianPlaylists[guardian].map(song => `
                         <span class="song-title">${song.title}</span> by <span">${song.artist}</span><br>
                     `).join('')}
-            `;
-            container.innerHTML = playlistDiv; // adds in the template literal as html content. += appends it instead of replacing it.
+            `;   // map() method iterates over each song and returns the array of said strings. join() method joins the strings into one.
+            container.innerHTML = playlistDiv; // content inside the container element is replaced with playlistDev content
         }
     }
 }
