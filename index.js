@@ -5,7 +5,7 @@ const songs = [
     { title: "I Want You Back", artist: "The Jackson 5", genre: "Pop" },
     { title: "Spirit in the Sky", artist: "Norman Greenbaum", genre: "Rock" },
     { title: "Cherry Bomb", artist: "The Runaways", genre: "Rock" },
-    { title: "Escape (The PiÃ±a Colada Song)", artist: "Rupert Holmes", genre: "Pop" },
+    { title: "Escape (The Piña Colada Song)", artist: "Rupert Holmes", genre: "Pop" },
     { title: "O-O-H Child", artist: "The Five Stairsteps", genre: "R&B" },
     { title: "Ain't No Mountain High Enough", artist: "Marvin Gaye & Tammi Terrell", genre: "R&B" },
     { title: "Come and Get Your Love", artist: "Redbone", genre: "Rock" },
