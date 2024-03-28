@@ -33,30 +33,36 @@ const guardians = {
 function generatePlaylist(guardians, songs) {
     const guardianPlaylists = {}; // created a variable to store the playlists object for each Guardian
 
-    for (let guardian in guardians) { // Iterate over each Guardian
-        const genre = guardians[guardian];   // Get the Guardian's preferred genre
+    for (let guardian in guardians) { // Iterates over each Guardian in guardians object
+        const genre = guardians[guardian];   // assigned a variable to the Guardian's(key) preferred genre(value), based on guardians object
         const playlist = songs    
-            .filter(song => song.genre === genre) // the filter() method creates a new array of only songs of each guardians genre
-            .map(song => ({ title: song.title, artist: song.artist })); // the map() method created a new object, that contains title and artist key: value pairs.
-        guardianPlaylists[guardian] = playlist;  // This then stores the playlist created in the guardianPlaylists object above
+            .filter(song => song.genre === genre) // the filter() method creates a new array(playlist) of only songs that match the guardians genre
+            .map(song => ({ title: song.title, artist: song.artist })); // the map() method creates a new object that contains just title and artist key: value pairs.
+        guardianPlaylists[guardian] = playlist;  //  adds the playlist for each guardian to the guardianPlaylists object
 
-        const container = document.createElement('div');
-        container.id = 'playlist'; // Set the id of the container element to 'playlist' to apply CSS styling
-        document.body.appendChild(container); // Append the container element to the document body
-    
         // Display the playlists 
-        for (let guardian in guardianPlaylists) { // iterates over each guardian in the playlists object
-            // template literal used to create string for each playlist that includes guardians name and their playlist. Template literal used also in the map() method to add CSS styling :
-            const playlistDiv = `
-                    <h2>${guardian}'s Playlist</h2>
-                    ${guardianPlaylists[guardian].map(song => `
-                        <span class="song-title">${song.title}</span> by <span">${song.artist}</span><br>
-                    `).join('')}
-            `;   // map() method iterates over each song and returns the array of said strings. join() method joins the strings into one.
-            container.innerHTML = playlistDiv; // content inside the container element is replaced with playlistDev content
+        const containerElement = document.createElement('div');
+        containerElement.id = 'playlist'; // Set the id of the container element to 'playlist' for CSS styling
+        document.body.appendChild(containerElement); // Appends the container element to the document body
+    
+        for (let guardian in guardianPlaylists) { // iterates over each guardian in the guardianPlaylists object
+            const playlistContent = // variable that stores HTML content for the guardian's playlist
+                // template literal used to create string for each playlist that includes guardians playlist and their name.
+                // Template literal used also in the map() method to add CSS styling :
+                `
+                <h2>${guardian}'s Playlist</h2>
+                ${guardianPlaylists[guardian]
+                    .map(song => 
+                        `
+                        <span class="song-title">${song.title}</span> by <span>${song.artist}</span><br>
+                        `
+                    )
+                    .join('')
+                }
+                `;   // map() method iterates over song array and returns a new string array of song titles and artists. join() method joins the strings into one for the innerHTML.
+            containerElement.innerHTML = playlistContent; // content inside the containerElement is replaced with playlistContent (the playlist string just generated)
         }
     }
 }
-
 // Call generatePlaylist and display the playlists for each Guardian
 generatePlaylist(guardians, songs);
